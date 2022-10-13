@@ -23,17 +23,17 @@ public interface TargetedCastable extends Castable {
     };
 
     @Override
-    default CastResult cast(LivingEntity user, long timestamp, String... args) throws CastException {
-        double range = getRange(user);
+    default CastResult cast(LivingEntity living, long timestamp, String... args) throws CastException {
+        double range = getRange(living);
 
         // Check Ray Casting to see if entity can be hit
 
         throw CastError.noTarget();
     }
 
-    CastResult cast(LivingEntity user, LivingEntity target, long timestamp, String... args) throws CastException;
+    CastResult cast(LivingEntity living, LivingEntity target, long timestamp, String... args) throws CastException;
 
-    default double getRange(LivingEntity entity) {
+    default double getRange(LivingEntity living) {
         return 100.0;
     }
 }

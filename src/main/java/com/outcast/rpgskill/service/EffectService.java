@@ -56,12 +56,12 @@ public class EffectService {
         });
     }
 
-    public ApplyableCarrier<?> getOrCreateCarrier(LivingEntity entity) {
-        if (cache.containsKey(entity.getUniqueId())) {
-            return cache.get(entity.getUniqueId());
+    public ApplyableCarrier<?> getOrCreateCarrier(LivingEntity living) {
+        if (cache.containsKey(living.getUniqueId())) {
+            return cache.get(living.getUniqueId());
         } else {
-            EntityEffectCarrier newCarrier = new EntityEffectCarrier(entity);
-            cache.put(entity.getUniqueId(), newCarrier);
+            EntityEffectCarrier newCarrier = new EntityEffectCarrier(living);
+            cache.put(living.getUniqueId(), newCarrier);
             return newCarrier;
         }
     }
@@ -83,43 +83,43 @@ public class EffectService {
         return false;
     }
 
-    public void applyEffect(LivingEntity entity, Applyable applyable) {
-        getOrCreateCarrier(entity).addEffect(applyable);
+    public void applyEffect(LivingEntity living, Applyable applyable) {
+        getOrCreateCarrier(living).addEffect(applyable);
     }
 
-    public void applyEffect(LivingEntity entity, String effectId) {
+    public void applyEffect(LivingEntity living, String effectId) {
         Applyable effect = effects.get(effectId);
         if (effect != null) {
-            getOrCreateCarrier(entity).addEffect(effect);
+            getOrCreateCarrier(living).addEffect(effect);
         }
     }
 
-    public boolean hasEffect(LivingEntity entity, Applyable applyable) {
-        return getOrCreateCarrier(entity).hasEffect(applyable);
+    public boolean hasEffect(LivingEntity living, Applyable applyable) {
+        return getOrCreateCarrier(living).hasEffect(applyable);
     }
 
-    public boolean hasEffect(LivingEntity entity, String effectId) {
-        return getOrCreateCarrier(entity).getEffects().stream().anyMatch(effect -> effectId.equals(effect.getId()));
+    public boolean hasEffect(LivingEntity living, String effectId) {
+        return getOrCreateCarrier(living).getEffects().stream().anyMatch(effect -> effectId.equals(effect.getId()));
     }
 
-    public void removeEffect(LivingEntity entity, Applyable applyable) {
-        getOrCreateCarrier(entity).removeEffect(applyable);
+    public void removeEffect(LivingEntity living, Applyable applyable) {
+        getOrCreateCarrier(living).removeEffect(applyable);
     }
 
-    public void removeEffect(LivingEntity entity, String effectId) {
-        Set<Applyable> effects = getOrCreateCarrier(entity).getEffects();
+    public void removeEffect(LivingEntity living, String effectId) {
+        Set<Applyable> effects = getOrCreateCarrier(living).getEffects();
 
         effects.removeIf(effect -> effect.getId().equals(effectId));
     }
 
-    public void clearEffects(LivingEntity entity) {
-        ApplyableCarrier<?> carrier = getOrCreateCarrier(entity);
+    public void clearEffects(LivingEntity living) {
+        ApplyableCarrier<?> carrier = getOrCreateCarrier(living);
 
         carrier.getEffects().forEach(Applyable::setRemoved);
     }
 
-    public void clearNegativeEffects(LivingEntity entity) {
-        ApplyableCarrier<?> carrier = getOrCreateCarrier(entity);
+    public void clearNegativeEffects(LivingEntity living) {
+        ApplyableCarrier<?> carrier = getOrCreateCarrier(living);
 
         carrier.getEffects().forEach(applyable -> {
             if (!applyable.isPositive()) {
@@ -128,8 +128,8 @@ public class EffectService {
         });
     }
 
-    public void clearPositiveEffects(LivingEntity entity) {
-        ApplyableCarrier<?> carrier = getOrCreateCarrier(entity);
+    public void clearPositiveEffects(LivingEntity living) {
+        ApplyableCarrier<?> carrier = getOrCreateCarrier(living);
 
         carrier.getEffects().forEach(applyable -> {
             if (applyable.isPositive()) {

@@ -15,21 +15,21 @@ public interface Castable {
 
     String getPermission();
 
-    TextComponent getDescription(LivingEntity entity);
+    TextComponent getDescription(LivingEntity living);
 
-    long getCooldown(LivingEntity entity);
+    long getCooldown(LivingEntity living);
 
-    double getResourceCost(LivingEntity entity);
+    double getResourceCost(LivingEntity living);
 
     /**
      * Triggers the use of this Castable by the provided Living
      *
-     * @param entity    The user of the skill
+     * @param living    The user of the skill
      * @param timestamp The timestamp of when the skill is being triggered
      * @param args      Arguments
      * @return A {@link CastResult}
      * @throws CastException If a skill-related error occurs
      */
-    CastResult cast(LivingEntity entity, long timestamp, String... args) throws CastException;
+    CastResult cast(LivingEntity living, long timestamp, String... args) throws CastException;
 
 }

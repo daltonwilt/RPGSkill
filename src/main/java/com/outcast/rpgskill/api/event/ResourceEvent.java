@@ -16,15 +16,15 @@ public class ResourceEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
 
     private boolean cancelled;
-    private LivingEntity entity;
+    private LivingEntity living;
     private ResourceEntity resourceEntity;
 
     /**
-     * @param entity that has triggered resource event
+     * @param living that has triggered resource event
      * @param resourceEntity interface that houses and allows manipulation of entity resources
      */
-    public ResourceEvent(LivingEntity entity, ResourceEntity resourceEntity) {
-        this.entity = entity;
+    public ResourceEvent(LivingEntity living, ResourceEntity resourceEntity) {
+        this.living = living;
         this.resourceEntity = resourceEntity;
     }
 
@@ -36,8 +36,8 @@ public class ResourceEvent extends Event implements Cancellable {
         return resourceEntity;
     }
 
-    public Optional<LivingEntity> getEntity() {
-        return Optional.ofNullable(entity);
+    public Optional<LivingEntity> getLivingEntity() {
+        return Optional.ofNullable(living);
     }
 
     @Override
@@ -51,8 +51,8 @@ public class ResourceEvent extends Event implements Cancellable {
     }
 
     public static class Create extends ResourceEvent {
-        public Create(LivingEntity entity, ResourceEntity resourceEntity) {
-            super(entity, resourceEntity);
+        public Create(LivingEntity living, ResourceEntity resourceEntity) {
+            super(living, resourceEntity);
         }
 
         public Create(ResourceEntity resourceEntity) {
@@ -63,8 +63,8 @@ public class ResourceEvent extends Event implements Cancellable {
     public static class Regen extends ResourceEvent implements Cancellable {
         private double regenAmount;
 
-        public Regen(LivingEntity entity, ResourceEntity resourceEntity, double regenAmount) {
-            super(entity, resourceEntity);
+        public Regen(LivingEntity living, ResourceEntity resourceEntity, double regenAmount) {
+            super(living, resourceEntity);
             this.regenAmount = regenAmount;
         }
 

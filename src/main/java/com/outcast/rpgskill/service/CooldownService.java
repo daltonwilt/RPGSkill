@@ -27,51 +27,51 @@ public class CooldownService {
     /**
      * Get when the provided user's last global cooldown began
      *
-     * @param user The user to check
+     * @param living last cooldown checked from
      * @return When the user's last global cooldown began, or 0L if the player has never been put on global cooldown
      */
-    public long getLastGlobalCooldownStart(LivingEntity user) {
-        return globalCooldowns.getOrDefault(user.getUniqueId(), 0L);
+    public long getLastGlobalCooldownStart(LivingEntity living) {
+        return globalCooldowns.getOrDefault(living.getUniqueId(), 0L);
     }
 
     /**
      * Get when ( in unix timestamp form ) the provided user's last global cooldown is/was due to end
      *
-     * @param user The user to check
+     * @param living The user to check
      * @return The cooldown end
      */
-    public long getLastGlobalCooldownEnd(LivingEntity user) {
-        return getLastGlobalCooldownStart(user) + config.GLOBAL_COOLDOWN;
+    public long getLastGlobalCooldownEnd(LivingEntity living) {
+        return getLastGlobalCooldownStart(living) + config.GLOBAL_COOLDOWN;
     }
 
     /**
      * Put the user on a global cooldown
      *
-     * @param user      The user to put on cooldown
+     * @param living      The user to put on cooldown
      * @param timestamp The current timestamp
      */
-    public void putOnGlobalCooldown(LivingEntity user, long timestamp) {
-        globalCooldowns.put(user.getUniqueId(), timestamp);
+    public void putOnGlobalCooldown(LivingEntity living, long timestamp) {
+        globalCooldowns.put(living.getUniqueId(), timestamp);
     }
 
     /**
      * Set the timestamp for when the last time was that the provided user cast the skill
      *
-     * @param user      The user who cast the skill
+     * @param living      The user who cast the skill
      * @param castable  The skill to put on cooldown
      * @param timestamp The current timestamp
      */
-    public void setLastUsedTimestamp(LivingEntity user, Castable castable, long timestamp) {
+    public void setLastUsedTimestamp(LivingEntity living, Castable castable, long timestamp) {
         Map<Castable, Long> userSkillCooldowns;
 
-        if (lastUsed.containsKey(user.getUniqueId())) {
-            userSkillCooldowns = lastUsed.get(user.getUniqueId());
+        if (lastUsed.containsKey(living.getUniqueId())) {
+            userSkillCooldowns = lastUsed.get(living.getUniqueId());
         } else {
             userSkillCooldowns = new HashMap<>();
         }
 
         userSkillCooldowns.put(castable, timestamp);
-        lastUsed.put(user.getUniqueId(), userSkillCooldowns);
+        lastUsed.put(living.getUniqueId(), userSkillCooldowns);
     }
 
     /**

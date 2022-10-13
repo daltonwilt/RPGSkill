@@ -16,8 +16,8 @@ public class EntityResourceUser implements Identifiable, ResourceEntity {
     private double current;
     private double max;
 
-    public EntityResourceUser(LivingEntity entity) {
-        this.uuid = entity.getUniqueId();
+    public EntityResourceUser(LivingEntity living) {
+        this.uuid = living.getUniqueId();
     }
 
     @Nonnull

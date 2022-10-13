@@ -20,7 +20,7 @@ public class BaseDamageSkill extends TargetedSkill {
     }
 
     @Override
-    public CastResult cast(LivingEntity entity, LivingEntity target, long timestamp, String... args) throws CastException {
+    public CastResult cast(LivingEntity living, LivingEntity target, long timestamp, String... args) throws CastException {
         if(args.length == 0)
             throw CastError.invalidArguments();
 
@@ -32,8 +32,8 @@ public class BaseDamageSkill extends TargetedSkill {
             damage = DEFAULT_DAMAGE;
         }
 
-        entity.sendMessage("Dealing " + damage + " damage to " + target.getType().getName());
-        target.damage(damage, entity);
+        living.sendMessage("Dealing " + damage + " damage to " + target.getType().getName());
+        target.damage(damage, living);
 
         return CastResult.success();
     }

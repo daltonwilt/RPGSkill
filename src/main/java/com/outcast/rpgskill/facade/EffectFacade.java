@@ -20,21 +20,21 @@ public class EffectFacade {
 
     EffectFacade() {}
 
-    public void applyEffect(LivingEntity user, String effectId) throws CommandException {
+    public void applyEffect(LivingEntity living, String effectId) throws CommandException {
         Optional<Applyable> namedEffect = effectService.getNamedEffect(effectId);
 
         if(!namedEffect.isPresent())
             throw new CommandException("No effect with an id of \"" + effectId + "\" could be found.");
 
-        namedEffect.ifPresent(e -> effectService.applyEffect(user, e));
+        namedEffect.ifPresent(e -> effectService.applyEffect(living, e));
     }
 
-    public void removeEffect(LivingEntity user, String effectId) throws CommandException {
-        effectService.removeEffect(user, effectId);
+    public void removeEffect(LivingEntity living, String effectId) throws CommandException {
+        effectService.removeEffect(living, effectId);
     }
 
-    public void onEntityDeath(LivingEntity entity) {
-        effectService.clearEffects(entity);
+    public void onEntityDeath(LivingEntity living) {
+        effectService.clearEffects(living);
     }
 
 }

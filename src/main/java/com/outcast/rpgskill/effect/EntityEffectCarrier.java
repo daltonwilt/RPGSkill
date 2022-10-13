@@ -25,7 +25,7 @@ public class EntityEffectCarrier implements Identifiable, ApplyableCarrier<Livin
     }
 
     @Override
-    public Optional<LivingEntity> getLiving() {
+    public Optional<LivingEntity> getLivingEntity() {
         if( cachedLiving == null )
             return Optional.empty();
 

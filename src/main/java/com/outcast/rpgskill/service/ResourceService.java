@@ -69,24 +69,24 @@ public class ResourceService {
         });
     }
 
-    public ResourceEntity getOrCreateEntity(LivingEntity entity) {
-        ResourceEntity resourceEntity = resourceEntities.get(entity.getUniqueId());
+    public ResourceEntity getOrCreateEntity(LivingEntity living) {
+        ResourceEntity resourceEntity = resourceEntities.get(living.getUniqueId());
 
         if (resourceEntity == null) {
-            resourceEntity = new EntityResourceUser(entity);
+            resourceEntity = new EntityResourceUser(living);
             resourceEntity.setMax(config.RESOURCE_LIMIT);
             resourceEntity.fill();
-            resourceEntities.put(entity.getUniqueId(), resourceEntity);
+            resourceEntities.put(living.getUniqueId(), resourceEntity);
 
             // call event
-            Bukkit.getPluginManager().callEvent(new ResourceEvent.Create(entity, resourceEntity));
+            Bukkit.getPluginManager().callEvent(new ResourceEvent.Create(living, resourceEntity));
         }
 
         return resourceEntity;
     }
 
-    public void withdrawResource(LivingEntity entity, double amount) {
-        getOrCreateEntity(entity).drain(amount);
+    public void withdrawResource(LivingEntity living, double amount) {
+        getOrCreateEntity(living).drain(amount);
     }
 
 }

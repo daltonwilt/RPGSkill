@@ -30,7 +30,7 @@ public abstract class AbstractSkill implements Castable {
     }
 
     @Override
-    public TextComponent getDescription(LivingEntity entity) {
+    public TextComponent getDescription(LivingEntity living) {
         return null;
     }
 

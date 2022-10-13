@@ -10,7 +10,7 @@ import java.util.Set;
 //===========================================================================================================
 public interface ApplyableCarrier<T extends LivingEntity> {
 
-    Optional<T> getLiving();
+    Optional<T> getLivingEntity();
 
     void addEffect(Applyable applyable);
 

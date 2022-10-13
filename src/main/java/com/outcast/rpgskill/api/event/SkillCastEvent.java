@@ -12,23 +12,23 @@ import org.bukkit.event.HandlerList;
 //===========================================================================================================
 public abstract class SkillCastEvent extends Event {
 
-    protected LivingEntity entity;
+    protected LivingEntity living;
     protected Castable skill;
     private long timestamp;
 
     /**
-     * @param entity that is casting the skill
+     * @param living that is casting the skill
      * @param skill the skill cast that has triggered this event
      * @param timestamp the point in which the skill was cast ( event )
      */
-    public SkillCastEvent(LivingEntity entity, Castable skill, long timestamp) {
-        this.entity = entity;
+    public SkillCastEvent(LivingEntity living, Castable skill, long timestamp) {
+        this.living = living;
         this.skill = skill;
         this.timestamp = timestamp;
     }
 
-    public LivingEntity getEntity() {
-        return entity;
+    public LivingEntity getLivingEntity() {
+        return living;
     }
 
     public Castable getSkill() {
@@ -48,12 +48,12 @@ public abstract class SkillCastEvent extends Event {
 
         private boolean cancelled;
 
-        public Pre(LivingEntity entity, Castable skill, long timestamp) {
-            super(entity, skill, timestamp);
+        public Pre(LivingEntity living, Castable skill, long timestamp) {
+            super(living, skill, timestamp);
         }
 
-        public void setEntity(LivingEntity entity) {
-            this.entity = entity;
+        public void setEntity(LivingEntity living) {
+            this.living = living;
         }
 
         public void setSkill(Castable skill) {
@@ -99,8 +99,8 @@ public abstract class SkillCastEvent extends Event {
 
         private CastResult result;
 
-        public Post(LivingEntity entity, Castable skill, long timestamp, CastResult result) {
-            super(entity, skill, timestamp);
+        public Post(LivingEntity living, Castable skill, long timestamp, CastResult result) {
+            super(living, skill, timestamp);
             this.result = result;
         }
 

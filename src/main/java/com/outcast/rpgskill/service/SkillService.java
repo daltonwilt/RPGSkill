@@ -49,15 +49,15 @@ public class SkillService {
     /**
      * Casts a castable with the properties stored within this carrier
      *
-     * @param entity      The caster casting the skill
+     * @param living      The caster casting the skill
      * @param castable  the castable skill
      * @param timestamp When the skill is being cast
      * @param args      arguments
      * @return a {@link CastResult}
      */
-    public CastResult castSkill(LivingEntity entity, Castable castable, long timestamp, String... args) throws CastException {
+    public CastResult castSkill(LivingEntity living, Castable castable, long timestamp, String... args) throws CastException {
         // Trigger the pre-cast event
-        SkillCastEvent.Pre preCastEvent = new SkillCastEvent.Pre(entity, castable, timestamp);
+        SkillCastEvent.Pre preCastEvent = new SkillCastEvent.Pre(living, castable, timestamp);
         // call event
         Bukkit.getPluginManager().callEvent(preCastEvent);
 
@@ -67,22 +67,22 @@ public class SkillService {
         }
 
         // Set the entity, skill and skill properties to what was set in the pre-cast event
-        entity = preCastEvent.getEntity();
+        living = preCastEvent.getLivingEntity();
         castable = preCastEvent.getSkill();
 
         // Validate
-        if (validateSkillUse(entity, castable, timestamp)) {
+        if (validateSkillUse(living, castable, timestamp)) {
 
             // Cast the skill
-            CastResult result = castable.cast(entity, timestamp, args);
+            CastResult result = castable.cast(living, timestamp, args);
 
             // Set cooldown(s) and withdraw resources
-            cooldownService.putOnGlobalCooldown(entity, timestamp);
-            cooldownService.setLastUsedTimestamp(entity, castable, timestamp);
-            resourceService.withdrawResource(entity, castable.getResourceCost(entity));
+            cooldownService.putOnGlobalCooldown(living, timestamp);
+            cooldownService.setLastUsedTimestamp(living, castable, timestamp);
+            resourceService.withdrawResource(living, castable.getResourceCost(living));
 
             // Trigger the post-cast event with the result
-            SkillCastEvent.Post postCastEvent = new SkillCastEvent.Post(entity, castable, timestamp, result);
+            SkillCastEvent.Post postCastEvent = new SkillCastEvent.Post(living, castable, timestamp, result);
             // call event
             Bukkit.getPluginManager().callEvent(postCastEvent);
 
@@ -93,19 +93,19 @@ public class SkillService {
         }
     }
 
-    private boolean validateSkillUse(LivingEntity entity, Castable castable, long timestamp) throws CastException {
-        boolean valid = validatePermission(entity, castable);
-        valid = valid && validateGlobalCooldown(entity, timestamp);
-        valid = valid && validateCooldown(entity, castable, timestamp);
-        valid = valid && validateResources(entity, castable);
+    private boolean validateSkillUse(LivingEntity living, Castable castable, long timestamp) throws CastException {
+        boolean valid = validatePermission(living, castable);
+        valid = valid && validateGlobalCooldown(living, timestamp);
+        valid = valid && validateCooldown(living, castable, timestamp);
+        valid = valid && validateResources(living, castable);
 
         return valid;
     }
 
-    private boolean validatePermission(LivingEntity entity, Castable skill) throws CastException {
+    private boolean validatePermission(LivingEntity living, Castable skill) throws CastException {
         // If the entity is a player, check for permission.
         // If the entity is not a player, just return true ( is presumed to be non-player character )
-        if (entity instanceof Player) {
+        if (living instanceof Player) {
             String permission = skill.getPermission();
 
             // If no permission is set, just return true
@@ -113,7 +113,7 @@ public class SkillService {
                 return true;
             }
 
-            boolean permitted = entity.hasPermission(permission);
+            boolean permitted = living.hasPermission(permission);
 
             if (!permitted) {
                 throw CastError.noPermission(skill);
@@ -123,18 +123,18 @@ public class SkillService {
         return true;
     }
 
-    private boolean validateGlobalCooldown(LivingEntity entity, Long timestamp) throws CastException {
-        if (cooldownService.isOnGlobalCooldown(entity, timestamp)) {
-            long cooldownEnd = cooldownService.getLastGlobalCooldownEnd(entity);
+    private boolean validateGlobalCooldown(LivingEntity living, Long timestamp) throws CastException {
+        if (cooldownService.isOnGlobalCooldown(living, timestamp)) {
+            long cooldownEnd = cooldownService.getLastGlobalCooldownEnd(living);
             throw CastError.onGlobalCooldown(timestamp, cooldownEnd);
         }
 
         return true;
     }
 
-    private boolean validateCooldown(LivingEntity entity, Castable castable, Long timestamp) throws CastException {
-        long lastUsed = cooldownService.getLastUsedTimestamp(entity, castable);
-        long cooldownDuration = castable.getCooldown(entity);
+    private boolean validateCooldown(LivingEntity living, Castable castable, Long timestamp) throws CastException {
+        long lastUsed = cooldownService.getLastUsedTimestamp(living, castable);
+        long cooldownDuration = castable.getCooldown(living);
 
         if (cooldownService.isCooldownOngoing(timestamp, lastUsed, cooldownDuration)) {
             long cooldownEnd = cooldownService.getCooldownEnd(lastUsed, cooldownDuration);
@@ -144,10 +144,10 @@ public class SkillService {
         return true;
     }
 
-    private boolean validateResources(LivingEntity entity, Castable castable) throws CastException {
-        ResourceEntity resourceEntity = resourceService.getOrCreateEntity(entity);
+    private boolean validateResources(LivingEntity living, Castable castable) throws CastException {
+        ResourceEntity resourceEntity = resourceService.getOrCreateEntity(living);
 
-        if (resourceEntity.getCurrent() < castable.getResourceCost(entity)) {
+        if (resourceEntity.getCurrent() < castable.getResourceCost(living)) {
             throw CastError.insufficientResources(castable);
         }
 
