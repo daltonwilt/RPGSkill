@@ -15,6 +15,7 @@ import java.util.UUID;
 // Class that caches effects that are currently on the living entity and the ability to
 // add/remove an effect from the entity
 //===========================================================================================================
+
 public class EntityEffectCarrier implements Identifiable, ApplyableCarrier<LivingEntity> {
 
     private LivingEntity cachedLiving;

@@ -6,6 +6,7 @@ import com.outcast.rpgskill.service.EffectService;
 // An object which can be applied to a character and cause various temporary effects upon their game
 // experience. This is doesn't persist across server restarts.
 //===========================================================================================================
+
 public interface Applyable {
 
     /**

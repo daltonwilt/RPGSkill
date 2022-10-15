@@ -12,6 +12,7 @@ import java.util.Optional;
 //===========================================================================================================
 // Facade class that allows the use of applying and removing effects for entities
 //===========================================================================================================
+
 @Singleton
 public class EffectFacade {
 

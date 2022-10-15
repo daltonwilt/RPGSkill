@@ -12,6 +12,7 @@ import com.google.inject.Singleton;
 //===========================================================================================================
 // Resource listener for updating entity resource information
 //===========================================================================================================
+
 @Singleton
 public class ResourceListener implements Listener {
 

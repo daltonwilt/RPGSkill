@@ -6,6 +6,7 @@ import org.bukkit.potion.PotionEffectType;
 //===========================================================================================================
 // Add a potion effect to an entity ( Needs to be finished )
 //===========================================================================================================
+
 public class TPotionEffect extends TemporaryEffect {
 
     private PotionEffect effect;

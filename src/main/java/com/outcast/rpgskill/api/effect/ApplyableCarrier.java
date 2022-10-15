@@ -8,6 +8,7 @@ import java.util.Set;
 //===========================================================================================================
 // Methods to add and remove effects from carrier entity
 //===========================================================================================================
+
 public interface ApplyableCarrier<T extends LivingEntity> {
 
     Optional<T> getLivingEntity();

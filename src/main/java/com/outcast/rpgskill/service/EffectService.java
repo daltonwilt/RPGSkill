@@ -13,6 +13,7 @@ import java.util.*;
 //===========================================================================================================
 // Utility service class that houses methods for getting/setting/registering effects
 //===========================================================================================================
+
 @Singleton
 public class EffectService {
 

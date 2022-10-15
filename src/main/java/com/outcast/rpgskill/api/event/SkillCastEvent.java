@@ -10,6 +10,7 @@ import org.bukkit.event.HandlerList;
 //===========================================================================================================
 // An event that tracks skill information while be casted by an entity
 //===========================================================================================================
+
 public abstract class SkillCastEvent extends Event {
 
     protected LivingEntity living;
@@ -42,6 +43,7 @@ public abstract class SkillCastEvent extends Event {
     //===========================================================================================================
     // Implement cancellable so skills can be canceled before casting
     //===========================================================================================================
+
     public static class Pre extends SkillCastEvent implements Cancellable {
 
         private static final HandlerList handlers = new HandlerList();
@@ -81,6 +83,7 @@ public abstract class SkillCastEvent extends Event {
     //===========================================================================================================
     // Again implement cancellable for those skills that continue channeling after casted
     //===========================================================================================================
+
     public static class Post extends SkillCastEvent implements Cancellable {
 
         private static final HandlerList handlers = new HandlerList();

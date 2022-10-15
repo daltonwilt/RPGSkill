@@ -6,6 +6,7 @@ import org.bukkit.entity.LivingEntity;
 //===========================================================================================================
 // Abstraction for castable skills that houses information for individual skill
 //===========================================================================================================
+
 public abstract class AbstractSkill implements Castable {
 
     private String id;

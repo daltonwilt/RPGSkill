@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 //
 // Doesn't currently work because need to figure out raycasting
 //===========================================================================================================
+
 public class BaseDamageSkill extends TargetedSkill {
 
     private final double DEFAULT_DAMAGE = 5.0;

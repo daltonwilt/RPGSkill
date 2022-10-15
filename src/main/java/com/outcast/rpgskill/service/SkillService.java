@@ -19,6 +19,7 @@ import java.util.Optional;
 //===========================================================================================================
 // Utility service class that houses methods for getting/setting/registering skills
 //===========================================================================================================
+
 @Singleton
 public class SkillService {
 

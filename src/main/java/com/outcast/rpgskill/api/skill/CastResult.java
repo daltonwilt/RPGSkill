@@ -3,6 +3,7 @@ package com.outcast.rpgskill.api.skill;
 //===========================================================================================================
 // Class that houses message of cast result depending on custom message
 //===========================================================================================================
+
 public class CastResult {
 
     private String message;

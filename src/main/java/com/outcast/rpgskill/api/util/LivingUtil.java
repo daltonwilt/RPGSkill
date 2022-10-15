@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 //===========================================================================================================
 // Utility methods for livingEnity
 //===========================================================================================================
+
 public class LivingUtil {
 
     // Apply potion effect

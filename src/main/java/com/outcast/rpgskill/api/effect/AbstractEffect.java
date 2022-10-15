@@ -5,6 +5,7 @@ import java.util.Objects;
 //===========================================================================================================
 // Abstraction foundation for adding different types of effects allowing them to be applied
 //===========================================================================================================
+
 public abstract class AbstractEffect implements Applyable {
 
     private String id;

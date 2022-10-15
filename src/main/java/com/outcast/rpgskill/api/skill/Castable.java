@@ -7,6 +7,7 @@ import org.bukkit.entity.LivingEntity;
 //===========================================================================================================
 // Interface that grabs skill information to casting result
 //===========================================================================================================
+
 public interface Castable {
 
     String getId();

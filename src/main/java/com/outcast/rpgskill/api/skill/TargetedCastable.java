@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 //
 // Need to figure out raycasting
 //===========================================================================================================
+
 public interface TargetedCastable extends Castable {
 
     // Need to figure out how to get the blocks on a target path Ray Casting

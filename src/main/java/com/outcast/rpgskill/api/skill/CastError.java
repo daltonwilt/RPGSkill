@@ -10,6 +10,7 @@ import java.util.Arrays;
 //===========================================================================================================
 // Utility class for Error results when casting skills
 //===========================================================================================================
+
 public final class CastError {
 
     public static CastException exceptionOf(Object... message) {
@@ -80,6 +81,7 @@ public final class CastError {
     //===========================================================================================================
     // Utility method to format duration into readable string
     //===========================================================================================================
+
     private static String formatDuration(long duration) {
         String format = "H'h' m'm' s.S's'";
 

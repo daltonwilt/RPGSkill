@@ -8,6 +8,7 @@ import org.bukkit.event.HandlerList;
 //===========================================================================================================
 // Event that registers all effects found in the game
 //===========================================================================================================
+
 public class EffectRegistrationEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();

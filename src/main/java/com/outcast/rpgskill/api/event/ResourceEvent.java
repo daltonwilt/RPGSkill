@@ -11,6 +11,7 @@ import java.util.Optional;
 //===========================================================================================================
 // An event that manipulates and creates resource information for an entity
 //===========================================================================================================
+
 public class ResourceEvent extends Event implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();

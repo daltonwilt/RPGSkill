@@ -3,6 +3,7 @@ package com.outcast.rpgskill.api.effect;
 //===========================================================================================================
 // An effect that will last for a certain amount
 //===========================================================================================================
+
 public abstract class TemporaryEffect extends AbstractEffect {
 
     private long timeApplied;

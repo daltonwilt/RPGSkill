@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 //===========================================================================================================
 // Entity listener that triggers different methods events
 //===========================================================================================================
+
 @Singleton
 public class EntityListener implements Listener {
 

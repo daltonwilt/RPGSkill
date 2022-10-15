@@ -10,6 +10,7 @@ import java.util.UUID;
 //===========================================================================================================
 // Class that implements resource entity to house specific resource information for a living entity
 //===========================================================================================================
+
 public class EntityResourceUser implements Identifiable, ResourceEntity {
 
     private UUID uuid;

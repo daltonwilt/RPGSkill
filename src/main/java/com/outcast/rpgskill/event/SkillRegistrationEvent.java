@@ -8,6 +8,7 @@ import org.bukkit.event.HandlerList;
 //===========================================================================================================
 // An event that registers all skills found in the game
 //===========================================================================================================
+
 public class SkillRegistrationEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();

@@ -25,9 +25,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class RPGSkill extends JavaPlugin {
 
     private static RPGSkill instance;
-
     private Components components;
-
     private Injector injector;
 
     //===========================================================================================================
